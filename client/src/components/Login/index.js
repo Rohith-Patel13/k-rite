@@ -42,7 +42,7 @@ const Login = () => {
       console.log(response.data)
       const {jwtToken} = response.data 
       if(jwtToken){
-        navigate('/dashboard')
+        navigate('/form')
       }
       setFormData({username:'',password:''})
     }catch(error){

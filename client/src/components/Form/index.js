@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
+
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +12,8 @@ const Form = () => {
     recordName: '',
     recordData: '',
   });
+
+  const navigate= useNavigate()
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,6 +34,10 @@ const Form = () => {
       console.log('Error While adding record Data:', error.message);
     }
   };
+
+  const showAllRecordsClicked=()=>{
+    navigate('/dashboard')
+  }
 
   return (
     <div>
@@ -91,7 +99,13 @@ const Form = () => {
         <button type="button"
          onClick={addButtonClicked}
          className='btn btn-primary'>Add Record</button>
+        
+        <button className='btn btn-primary'
+        type='button'
+        onClick={showAllRecordsClicked}
+        >Show All Records</button>
         </div>
+        
       </form>
     </div>
   );
