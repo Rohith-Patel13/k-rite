@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
@@ -12,6 +13,8 @@ const Login = () => {
     username: '',
     password: ''
   });
+
+  const navigate = useNavigate()
 
   const handleInputChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -37,9 +40,12 @@ const Login = () => {
     try{
       const response = await axios.post('/api/users/login',formData)
       console.log(response.data)
+      const {jwtToken} = response.data 
+      if(jwtToken){
+        navigate('/dashboard')
+      }
       setFormData({username:'',password:''})
     }catch(error){
-      
       if(error.response && error.response.status === 404){
         alert('user does not exists')
       }
@@ -49,7 +55,6 @@ const Login = () => {
       console.log(error.message)
     }
   }
-
 
   return (
     <div className='login-form-bg'>

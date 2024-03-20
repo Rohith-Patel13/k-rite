@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 
 const userRoutes = require('./routes/user')
+const userRecords = require('./routes/record')
 
 app.use(express.json())
 
@@ -19,3 +20,4 @@ app.listen(7895,()=>{
 
 app.use('/api/users',userRoutes)
 
+app.use('/api/records',userRecords)
