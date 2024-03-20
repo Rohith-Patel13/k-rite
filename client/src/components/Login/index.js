@@ -21,12 +21,33 @@ const Login = () => {
 
   const registerButtonClicked = async ()=>{
     try {
-        const response = await axios.post('/api/register',{test:'Test'})
+        const response = await axios.post('/api/users/register',formData)
         console.log(response.data)
+        setFormData({username:'',password:''})
     } catch (error) {
-        console.log(error.message)
+      if (error.response && error.response.status === 400) {
+        alert('Username already exists'); 
+      } else {
+        console.log(error.message);
+      }       
+    }    
+  }
+
+  const loginButtonClicked = async ()=>{
+    try{
+      const response = await axios.post('/api/users/login',formData)
+      console.log(response.data)
+      setFormData({username:'',password:''})
+    }catch(error){
+      
+      if(error.response && error.response.status === 404){
+        alert('user does not exists')
+      }
+      else if(error.response && error.response.status === 400){
+        alert("invalid password")
+      }
+      console.log(error.message)
     }
-    
   }
 
 
@@ -62,7 +83,7 @@ const Login = () => {
         </div>
 
         <div className='btn-bg'>
-            <button type="button" className='btn btn-primary'>Login</button>
+            <button type="button" className='btn btn-primary' onClick={loginButtonClicked}>Login</button>
             <button type="button" className='btn btn-primary' onClick={registerButtonClicked}>Register</button>
         </div>
       </form>
@@ -71,3 +92,5 @@ const Login = () => {
 }
 
 export default Login;
+
+
