@@ -88,7 +88,7 @@ const Form = () => {
           />
         </div>
         <div className='btn-bg'>
-        <button type="submit"
+        <button type="button"
          onClick={addButtonClicked}
          className='btn btn-primary'>Add Record</button>
         </div>
