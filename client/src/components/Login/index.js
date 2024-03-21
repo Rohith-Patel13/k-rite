@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Navigate } from 'react-router-dom';
+import Cookies from 'js-cookie'
 import axios from 'axios';
 
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
@@ -41,7 +42,11 @@ const Login = () => {
       const response = await axios.post('/api/users/login',formData)
       console.log(response.data)
       const {jwtToken} = response.data 
-      if(jwtToken){
+
+      if(response.statusText==="OK"){
+
+        // localStorage.setItem('jwtToken',jwtToken)
+        Cookies.set('jwtToken', jwtToken, {expires: 1})
         navigate('/form')
       }
       setFormData({username:'',password:''})
@@ -54,6 +59,12 @@ const Login = () => {
       }
       console.log(error.message)
     }
+  }
+
+  const token = localStorage.getItem("jwtToken");
+  if (token) {
+    // If token is not available, redirect to login page
+    return <Navigate to="/form" />;
   }
 
   return (

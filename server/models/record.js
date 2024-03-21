@@ -3,7 +3,7 @@ const {Schema,model} = require('mongoose')
 const recordSchema = new Schema({
     domain:String,
     recordType:String,
-    recordName:String,
+    ttl:String,
     recordData:String
 },{timestamps:true})
 

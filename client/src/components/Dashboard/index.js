@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
+import { Navigate,useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
 import UpdateForm from '../UpdateForm/index';
 import './index.css'
 
@@ -7,6 +10,7 @@ const Dashboard = () => {
   const [dnsRecords, setDnsRecords] = useState([]);
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [isUpdateFormVisible, setUpdateFormVisible] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchData();
@@ -44,6 +48,21 @@ const Dashboard = () => {
 
   console.log(selectedRecord,'out')
 
+  // const token = localStorage.getItem("jwtToken");
+  const token = Cookies.get("jwtToken");
+  if (!token) {
+    // If token is not available, redirect to login page
+    return <Navigate to="/login" />;
+    
+  }
+
+  const logoutClicked =()=>{
+    // localStorage.removeItem("jwtToken")
+    Cookies.remove("jwtToken")
+    navigate('/login')
+  }
+
+
   return (
     <div className="table-container">
       <h2>DNS Records Dashboard</h2>
@@ -62,7 +81,7 @@ const Dashboard = () => {
           <tr>
             <th>Domain</th>
             <th>Record Type</th>
-            <th>Record Name</th>
+            <th>TTL(seconds)</th>
             <th>Record Data</th>
             <th>Actions</th>
           </tr>
@@ -72,7 +91,7 @@ const Dashboard = () => {
             <tr key={record._id}>
               <td>{record.domain}</td>
               <td>{record.recordType}</td>
-              <td>{record.recordName}</td>
+              <td>{record.ttl}</td>
               <td>{record.recordData}</td>
               <td>
                 <button className='btn btn-warning' onClick={() => handleUpdateRecord(record)}>Update</button>
@@ -82,6 +101,8 @@ const Dashboard = () => {
           ))}
         </tbody>
       </table>
+
+      <button className='btn btn-danger' onClick={logoutClicked}>Logout</button>
 
     </div>
   );

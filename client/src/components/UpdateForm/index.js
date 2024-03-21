@@ -57,12 +57,12 @@ const UpdateForm = ({ selectedRecord, onClose,setDnsRecords,dnsRecords }) => {
           />
         </div>
         <div>
-          <label htmlFor="updatedRecordName">Record Name:</label>
+          <label htmlFor="updatedRecordName">TTL</label>
           <input
             type="text"
             id="updatedRecordName"
             name="recordName"
-            value={updatedRecord.recordName}
+            value={updatedRecord.ttl}
             onChange={handleInputChange}
             required
           />

@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Navigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
 
@@ -9,7 +11,7 @@ const Form = () => {
   const [formData, setFormData] = useState({
     domain: '',
     recordType: '',
-    recordName: '',
+    ttl: '',
     recordData: '',
   });
 
@@ -27,7 +29,7 @@ const Form = () => {
       setFormData({
         domain: '',
         recordType: '',
-        recordName: '',
+        ttl: '',
         recordData: '',
       });
     } catch (error) {
@@ -37,6 +39,19 @@ const Form = () => {
 
   const showAllRecordsClicked=()=>{
     navigate('/dashboard')
+  }
+
+  // const token = localStorage.getItem("jwtToken");
+  const token = Cookies.get("jwtToken");
+  if (!token) {
+    // If token is not available, redirect to login page
+    return <Navigate to="/login" />;
+    
+  }
+
+  const logoutClicked =()=>{
+    Cookies.remove('jwtToken')
+    navigate('/login')
   }
 
   return (
@@ -70,16 +85,16 @@ const Form = () => {
           />
         </div>
         <div className='eachData'>
-          <label htmlFor="recordNameId">Record Name:</label>
+          <label htmlFor="ttlId">TTL:</label>
           <input
             type="text"
-            id="recordNameId"
-            name="recordName"
-            value={formData.recordName}
+            id="ttlId"
+            name="ttl"
+            value={formData.ttl}
             onChange={handleInputChange}
             required
             className='form-control'
-            placeholder='Enter Record Name'
+            placeholder='Enter ttl in seconds'
           />
         </div>
         <div className='eachData'>
@@ -92,7 +107,7 @@ const Form = () => {
             onChange={handleInputChange}
             required
             className='form-control'
-            placeholder='Enter Record Data'
+            placeholder='Enter IP Address'
           />
         </div>
         <div className='btn-bg'>
@@ -104,9 +119,12 @@ const Form = () => {
         type='button'
         onClick={showAllRecordsClicked}
         >Show All Records</button>
+
+        <button className='btn btn-danger' onClick={logoutClicked}>Logout</button>
         </div>
         
       </form>
+      
     </div>
   );
 }
