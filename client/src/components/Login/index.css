@@ -1,10 +1,30 @@
-.login-form-bg{
+.login-form-bg {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.btn-bg{
+    margin-top: 50px; /* Add margin to the top */
+  }
+  
+  
+  
+  .btn-bg {
     text-align: center;
-}
+    margin-top: 20px; /* Add margin to the top of the button container */
+  }
+  
+  .btn-primary {
+    margin-right: 10px; /* Add margin between the buttons */
+    background-color: #007bff; /* Change button background color */
+    border-color: #007bff; /* Change button border color */
+    color: #fff; /* Change button text color */
+    font-weight: bold; /* Add bold font weight to the button text */
+    padding: 10px 20px; /* Add padding to the buttons */
+    border-radius: 5px; /* Add border radius to the buttons */
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Change button background color on hover */
+    border-color: #0056b3; /* Change button border color on hover */
+  }
+  
