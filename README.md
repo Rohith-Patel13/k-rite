@@ -1,3 +1,7 @@
+https://github.com/Rohith-Patel13/k-rite/issues/1#issuecomment-2014865417
+
+
+
 # clone the project in your vs code as below:
 ```sh
 git clone <github_web_URL>
