@@ -6,7 +6,7 @@ https://github.com/Rohith-Patel13/k-rite/assets/139628530/5a28e919-62b2-4202-a62
 
 # clone the project in your vs code as below:
 ```sh
-git clone <github_web_URL>
+git clone https://github.com/Rohith-Patel13/k-rite.git
 ```
 
 # Open terminal
