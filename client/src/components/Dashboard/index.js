@@ -62,6 +62,10 @@ const Dashboard = () => {
     navigate('/login')
   }
 
+  const fillFormClicked=()=>{
+    navigate('/form')
+  }
+
 
   return (
     <div className="table-container">
@@ -102,7 +106,10 @@ const Dashboard = () => {
         </tbody>
       </table>
 
-      <button className='btn btn-danger' onClick={logoutClicked}>Logout</button>
+      <div className='btn-container'>
+        <button className='btn btn-danger' onClick={logoutClicked}>Logout</button>
+        <button className='btn btn-primary' onClick={fillFormClicked}>Fill Form</button>
+      </div>
 
     </div>
   );

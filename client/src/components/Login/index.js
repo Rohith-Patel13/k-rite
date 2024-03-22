@@ -61,7 +61,8 @@ const Login = () => {
     }
   }
 
-  const token = localStorage.getItem("jwtToken");
+  // const token = localStorage.getItem("jwtToken");
+  const token = Cookies.get('jwtToken')
   if (token) {
     // If token is not available, redirect to login page
     return <Navigate to="/form" />;
